@@ -36,6 +36,9 @@ agent=create_agent(
     tools=[get_temp_details]#return
 )
 
+@app.get("/")
+def home():
+    return {"status": "running"}
 
 
 @app.post("/get_weather")
