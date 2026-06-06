@@ -41,13 +41,32 @@ def home():
     return {"status": "running"}
 
 
+# @app.post("/get_weather")
+# def incoming_weather_parameters(
+#     city:str=Query(...),
+#     question:str=Query(...)):
+#     result=agent.invoke({
+#         "messages":[{"role":"user","content":f"city:{city} question:{question}" }]
+
+#     })
+#     return result
+
 @app.post("/get_weather")
 def incoming_weather_parameters(
-    city:str=Query(...),
-    question:str=Query(...)):
-    result=agent.invoke({
-        "messages":[{"role":"user","content":f"city:{city} question:{question}" }]
+    city: str = Query(...),
+    question: str = Query(...)
+):
+    try:
+        result = agent.invoke({
+            "messages": [
+                {
+                    "role": "user",
+                    "content": f"city:{city} question:{question}"
+                }
+            ]
+        })
 
-    })
-    return result
+        return result
 
+    except Exception as e:
+        return {"error": str(e)}
