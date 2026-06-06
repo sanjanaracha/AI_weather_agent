@@ -12,4 +12,7 @@ if st.button("ask answer"):
     res=requests.post(f"{server_url}/get_weather",params={
                             "city":city,
                             "question":question})
-    st.success(res.json()["messages"][-1]["content"])
+    # st.success(res.json()["messages"][-1]["content"])
+    
+    st.write("Status Code:", res.status_code)
+    st.write("Response Text:", res.text)
